@@ -19,4 +19,6 @@ Route::get('/user', function (Request $request) {
 // Route::delete('/buku/{id}', [BukuController::class, 'destroy']);
 
 // penyederhanaan route api
-Route::apiResource('buku', BukuController::class);
+Route::middleware('apikey')->group(function () {
+    Route::apiResource('buku', BukuController::class);
+});

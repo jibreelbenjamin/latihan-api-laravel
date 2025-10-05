@@ -12,7 +12,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        // untuk alias route middleware
+        $middleware->alias([
+            'apikey' => \App\Http\Middleware\ApiKeyMiddleware::class,
+        ]);
+
+        // kalau kamu mau supaya middleware ini berlaku ke grup 'api'
+        $middleware->api(prepend: [
+            \App\Http\Middleware\ApiKeyMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

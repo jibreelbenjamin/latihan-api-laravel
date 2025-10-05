@@ -18,7 +18,11 @@ class BukuController extends Controller
         if($request->input('page') != ''){
             $url .= "?page=" . $request->input('page');
         }
-        $response = $client->request('GET', $url);
+        $response = $client->request('GET', $url, [
+            'headers' => [
+                'X-API-KEY' => 'RahasiaBanget123'
+            ]
+        ]);
         // echo $response->getStatusCode(); // debug kode status
         $data = json_decode($response->getBody()->getContents(), true);
         // dd($data);
@@ -55,6 +59,9 @@ class BukuController extends Controller
         $client = new Client();
         $url = "https://buku-api.test/api/buku";
         $response = $client->request('POST', $url, [
+            'headers' => [
+                'X-API-KEY' => 'RahasiaBanget123'
+            ],
             'json' => $params
         ]);
 
@@ -86,7 +93,11 @@ class BukuController extends Controller
     {
         $client = new Client();
         $url = "https://buku-api.test/api/buku/$id";
-        $response = $client->request('GET', $url);
+        $response = $client->request('GET', $url, [
+            'headers' => [
+                'X-API-KEY' => 'RahasiaBanget123'
+            ]
+        ]);
         $data = json_decode($response->getBody()->getContents(), true);
         // echo $id;
         // dd($data);
@@ -119,6 +130,9 @@ class BukuController extends Controller
         $client = new Client();
         $url = "https://buku-api.test/api/buku/$id";
         $response = $client->request('PUT', $url, [
+            'headers' => [
+                'X-API-KEY' => 'RahasiaBanget123'
+            ],
             'json' => $params
         ]);
 
@@ -141,7 +155,11 @@ class BukuController extends Controller
     {
         $client = new Client();
         $url = "https://buku-api.test/api/buku/$id";
-        $response = $client->request('DELETE', $url);
+        $response = $client->request('DELETE', $url, [
+            'headers' => [
+                'X-API-KEY' => 'RahasiaBanget123'
+            ]
+        ]);
 
         $data = json_decode($response->getBody()->getContents(), true);
         // dd($data);
