@@ -74,8 +74,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php $i=1; @endphp
-                    @foreach ($data as $item)
+                    @php $i=$data['from']; @endphp
+                    @foreach ($data['data'] as $item)
                         <tr>
                             <td>{{ $i++ }}</td>
                             <td>{{ $item['judul'] }}</td>
@@ -91,23 +91,27 @@
                             </td>
                         </tr>
                         @endforeach
-                        <tr>
-                            <td>NULL</td>
-                            <td>NULL</td>
-                            <td>NULL</td>
-                            <td>NULL</td>
-                            <td>
-                                <a href="buku/999999" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="buku/999999" method="post" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus buku NULL?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger btn-sm">Del</button>
-                                </form>
-                            </td>
-                        </tr>
                 </tbody>
             </table>
-
+            @if ($data['links'])       
+               
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        @foreach ($data['links'] as $item)
+                        @php 
+                            $label = $item['label'];
+                            if ($label === 'pagination.previous') $label = 'Previous';
+                            elseif ($label === 'pagination.next') $label = 'Next';
+                        @endphp 
+                        <li class="page-item {{ isset($item['page']) == null ? 'disabled' : '' }} {{ $item['active'] ? 'active' : '' }}">
+                            <a class="page-link" href="?page={{ isset($item['page']) ? $item['page'] : '...' }}">
+                                {{ $label }}
+                            </a>
+                        </li>
+                        @endforeach
+                    </ul>
+                </nav>
+            @endif
         </div>
         <!-- AKHIR DATA -->
         @endif

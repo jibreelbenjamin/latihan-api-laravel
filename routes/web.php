@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Buku;
 use App\Http\Controllers\BukuController; 
 use Illuminate\Support\Facades\Route;
 

@@ -14,7 +14,7 @@ class BukuController extends Controller
      */
     public function index()
     {
-        $data = Buku::all();
+        $data = Buku::latest()->paginate(15);
         return response()->json($data, 200);
 
         // return response()->json([
