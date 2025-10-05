@@ -52,7 +52,8 @@ class BukuController extends Controller
         try { // error handling menggunakan try catch
             $post = $dataBuku->save();
             return response()->json([
-                'message' => 'berhasil memasukan data',
+                'status' => true,
+                'message' => 'Berhasil memasukan data',
                 'data' => $dataBuku
             ], 200);
         } catch (\Exception $e) {
@@ -60,7 +61,7 @@ class BukuController extends Controller
                 'status' => false,
                 'message' => 'Terjadi kesalahan',
                 'error' => $e->getMessage() // memuat error
-            ], 500);
+            ]);
         }
 
     }
@@ -74,13 +75,13 @@ class BukuController extends Controller
         if($data){ // null handling
             return response()->json([
                 'status' => true,
-                'message' => 'data ditemukan',
+                'message' => 'Data ditemukan',
                 'data' => $data
             ]);
         } else {
             return response()->json([
                 'status' => false,
-                'message' => 'data tidak tersedia'
+                'message' => 'Data tidak tersedia'
             ]);
         }
     }
@@ -94,7 +95,7 @@ class BukuController extends Controller
         if(empty($dataBuku)){
             return response()->json([
                 'status' => false,
-                'message' => 'data tidak tersedia'
+                'message' => 'Data tidak tersedia'
             ]);
         }
 
@@ -119,7 +120,8 @@ class BukuController extends Controller
         try { // error handling menggunakan try catch
             $post = $dataBuku->save();
             return response()->json([
-                'message' => 'berhasil update data',
+                'status' => true,
+                'message' => 'Berhasil update data',
                 'data' => $dataBuku
             ], 200);
         } catch (\Exception $e) {
@@ -140,14 +142,15 @@ class BukuController extends Controller
         if(empty($dataBuku)){
             return response()->json([
                 'status' => false,
-                'message' => 'data tidak tersedia'
+                'message' => 'Data tidak tersedia'
             ]);
         }
         
         try { // error handling menggunakan try catch
             $post = $dataBuku->delete();
             return response()->json([
-                'message' => 'berhasil hapus data',
+                'status' => true,
+                'message' => 'Berhasil hapus data',
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
